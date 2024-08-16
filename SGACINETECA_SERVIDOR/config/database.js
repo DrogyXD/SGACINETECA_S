@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 
+// Asegúrate de que el nombre de la variable de entorno sea correcto
+const mongoURI = process.env.MONGODB_URI;
+
 const conectarDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URI, {
+        await mongoose.connect(mongoURI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        console.log('MongoDB Connected');
-    } catch (error) {
-        console.error('Error connecting to MongoDB', error);
-        process.exit(1);
+        console.log('Conectado a MongoDB');
+    } catch (err) {
+        console.error('Error de conexión a MongoDB:', err);
+        process.exit(1); // Detener el proceso si no se puede conectar
     }
 };
 
